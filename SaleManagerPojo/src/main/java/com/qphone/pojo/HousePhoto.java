@@ -1,11 +1,11 @@
 package com.qphone.pojo;
 
 import java.math.BigDecimal;
-/**
- * Created by 高玺 on 2019/7/1.
- */
+
 public class HousePhoto {
     private BigDecimal housePhotoId;
+
+    private BigDecimal huoseInforId;
 
     private String housePhotoP1;
 
@@ -15,12 +15,26 @@ public class HousePhoto {
 
     private String housePhotoP4;
 
+    private String housePhotoP5;
+
+    private String housePhotoP6;
+
+    private String housePhotoP7;
+
     public BigDecimal getHousePhotoId() {
         return housePhotoId;
     }
 
     public void setHousePhotoId(BigDecimal housePhotoId) {
         this.housePhotoId = housePhotoId;
+    }
+
+    public BigDecimal getHuoseInforId() {
+        return huoseInforId;
+    }
+
+    public void setHuoseInforId(BigDecimal huoseInforId) {
+        this.huoseInforId = huoseInforId;
     }
 
     public String getHousePhotoP1() {
@@ -53,5 +67,29 @@ public class HousePhoto {
 
     public void setHousePhotoP4(String housePhotoP4) {
         this.housePhotoP4 = housePhotoP4 == null ? null : housePhotoP4.trim();
+    }
+
+    public String getHousePhotoP5() {
+        return housePhotoP5;
+    }
+
+    public void setHousePhotoP5(String housePhotoP5) {
+        this.housePhotoP5 = housePhotoP5 == null ? null : housePhotoP5.trim();
+    }
+
+    public String getHousePhotoP6() {
+        return housePhotoP6;
+    }
+
+    public void setHousePhotoP6(String housePhotoP6) {
+        this.housePhotoP6 = housePhotoP6 == null ? null : housePhotoP6.trim();
+    }
+
+    public String getHousePhotoP7() {
+        return housePhotoP7;
+    }
+
+    public void setHousePhotoP7(String housePhotoP7) {
+        this.housePhotoP7 = housePhotoP7 == null ? null : housePhotoP7.trim();
     }
 }

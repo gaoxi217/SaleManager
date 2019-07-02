@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qphone.dao.SysUserMapper">
+  <resultMap id="BaseResultMap" type="com.qphone.pojo.SysUser">
+    <id column="USER_ID" jdbcType="DECIMAL" property="userId" />
+    <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+    <result column="USER_SEXY" jdbcType="VARCHAR" property="userSexy" />
+    <result column="USER_REALNAME" jdbcType="VARCHAR" property="userRealname" />
+    <result column="USER_TEL" jdbcType="VARCHAR" property="userTel" />
+    <result column="USER_ADDR" jdbcType="VARCHAR" property="userAddr" />
+    <result column="USER_CREATE" jdbcType="DATE" property="userCreate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    USER_ID, USER_NAME, USER_SEXY, USER_REALNAME, USER_TEL, USER_ADDR, USER_CREATE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_USER
+    where USER_ID = #{userId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from SYS_USER
+    where USER_ID = #{userId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.qphone.pojo.SysUser">
+    insert into SYS_USER (USER_ID, USER_NAME, USER_SEXY, 
+      USER_REALNAME, USER_TEL, USER_ADDR, 
+      USER_CREATE)
+    values (#{userId,jdbcType=DECIMAL}, #{userName,jdbcType=VARCHAR}, #{userSexy,jdbcType=VARCHAR}, 
+      #{userRealname,jdbcType=VARCHAR}, #{userTel,jdbcType=VARCHAR}, #{userAddr,jdbcType=VARCHAR}, 
+      #{userCreate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qphone.pojo.SysUser">
+    insert into SYS_USER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="userName != null">
+        USER_NAME,
+      </if>
+      <if test="userSexy != null">
+        USER_SEXY,
+      </if>
+      <if test="userRealname != null">
+        USER_REALNAME,
+      </if>
+      <if test="userTel != null">
+        USER_TEL,
+      </if>
+      <if test="userAddr != null">
+        USER_ADDR,
+      </if>
+      <if test="userCreate != null">
+        USER_CREATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=DECIMAL},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userSexy != null">
+        #{userSexy,jdbcType=VARCHAR},
+      </if>
+      <if test="userRealname != null">
+        #{userRealname,jdbcType=VARCHAR},
+      </if>
+      <if test="userTel != null">
+        #{userTel,jdbcType=VARCHAR},
+      </if>
+      <if test="userAddr != null">
+        #{userAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="userCreate != null">
+        #{userCreate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qphone.pojo.SysUser">
+    update SYS_USER
+    <set>
+      <if test="userName != null">
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userSexy != null">
+        USER_SEXY = #{userSexy,jdbcType=VARCHAR},
+      </if>
+      <if test="userRealname != null">
+        USER_REALNAME = #{userRealname,jdbcType=VARCHAR},
+      </if>
+      <if test="userTel != null">
+        USER_TEL = #{userTel,jdbcType=VARCHAR},
+      </if>
+      <if test="userAddr != null">
+        USER_ADDR = #{userAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="userCreate != null">
+        USER_CREATE = #{userCreate,jdbcType=DATE},
+      </if>
+    </set>
+    where USER_ID = #{userId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qphone.pojo.SysUser">
+    update SYS_USER
+    set USER_NAME = #{userName,jdbcType=VARCHAR},
+      USER_SEXY = #{userSexy,jdbcType=VARCHAR},
+      USER_REALNAME = #{userRealname,jdbcType=VARCHAR},
+      USER_TEL = #{userTel,jdbcType=VARCHAR},
+      USER_ADDR = #{userAddr,jdbcType=VARCHAR},
+      USER_CREATE = #{userCreate,jdbcType=DATE}
+    where USER_ID = #{userId,jdbcType=DECIMAL}
+  </update>
+</mapper>

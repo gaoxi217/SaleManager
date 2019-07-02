@@ -1,6 +1,7 @@
 package com.qphone.pojo;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class HouseInfor {
     private BigDecimal huoseInforId;
@@ -21,11 +22,13 @@ public class HouseInfor {
 
     private String houseInforDecoration;
 
-    private String houseInforMoney;
+    private BigDecimal houseInforMoney;
+
+    private String houseInforStatus;
 
     private BigDecimal houseInforLevel;
 
-    private String houseInforStatus;
+    private Date houseInforTime;
 
     public BigDecimal getHuoseInforId() {
         return huoseInforId;
@@ -99,12 +102,20 @@ public class HouseInfor {
         this.houseInforDecoration = houseInforDecoration == null ? null : houseInforDecoration.trim();
     }
 
-    public String getHouseInforMoney() {
+    public BigDecimal getHouseInforMoney() {
         return houseInforMoney;
     }
 
-    public void setHouseInforMoney(String houseInforMoney) {
-        this.houseInforMoney = houseInforMoney == null ? null : houseInforMoney.trim();
+    public void setHouseInforMoney(BigDecimal houseInforMoney) {
+        this.houseInforMoney = houseInforMoney;
+    }
+
+    public String getHouseInforStatus() {
+        return houseInforStatus;
+    }
+
+    public void setHouseInforStatus(String houseInforStatus) {
+        this.houseInforStatus = houseInforStatus == null ? null : houseInforStatus.trim();
     }
 
     public BigDecimal getHouseInforLevel() {
@@ -115,11 +126,11 @@ public class HouseInfor {
         this.houseInforLevel = houseInforLevel;
     }
 
-    public String getHouseInforStatus() {
-        return houseInforStatus;
+    public Date getHouseInforTime() {
+        return houseInforTime;
     }
 
-    public void setHouseInforStatus(String houseInforStatus) {
-        this.houseInforStatus = houseInforStatus == null ? null : houseInforStatus.trim();
+    public void setHouseInforTime(Date houseInforTime) {
+        this.houseInforTime = houseInforTime;
     }
 }

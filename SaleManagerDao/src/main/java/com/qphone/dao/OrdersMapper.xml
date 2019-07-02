@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qphone.dao.OrdersMapper">
+  <resultMap id="BaseResultMap" type="com.qphone.pojo.Orders">
+    <id column="ORDERS_ID" jdbcType="DECIMAL" property="ordersId" />
+    <result column="ORDERS_SJID" jdbcType="VARCHAR" property="ordersSjid" />
+    <result column="ORDERS_NAME" jdbcType="VARCHAR" property="ordersName" />
+    <result column="ORDERS_MONEY" jdbcType="DECIMAL" property="ordersMoney" />
+    <result column="ORDERS_TIME" jdbcType="DATE" property="ordersTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ORDERS_ID, ORDERS_SJID, ORDERS_NAME, ORDERS_MONEY, ORDERS_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ORDERS
+    where ORDERS_ID = #{ordersId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from ORDERS
+    where ORDERS_ID = #{ordersId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.qphone.pojo.Orders">
+    insert into ORDERS (ORDERS_ID, ORDERS_SJID, ORDERS_NAME, 
+      ORDERS_MONEY, ORDERS_TIME)
+    values (#{ordersId,jdbcType=DECIMAL}, #{ordersSjid,jdbcType=VARCHAR}, #{ordersName,jdbcType=VARCHAR}, 
+      #{ordersMoney,jdbcType=DECIMAL}, #{ordersTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qphone.pojo.Orders">
+    insert into ORDERS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ordersId != null">
+        ORDERS_ID,
+      </if>
+      <if test="ordersSjid != null">
+        ORDERS_SJID,
+      </if>
+      <if test="ordersName != null">
+        ORDERS_NAME,
+      </if>
+      <if test="ordersMoney != null">
+        ORDERS_MONEY,
+      </if>
+      <if test="ordersTime != null">
+        ORDERS_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ordersId != null">
+        #{ordersId,jdbcType=DECIMAL},
+      </if>
+      <if test="ordersSjid != null">
+        #{ordersSjid,jdbcType=VARCHAR},
+      </if>
+      <if test="ordersName != null">
+        #{ordersName,jdbcType=VARCHAR},
+      </if>
+      <if test="ordersMoney != null">
+        #{ordersMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="ordersTime != null">
+        #{ordersTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qphone.pojo.Orders">
+    update ORDERS
+    <set>
+      <if test="ordersSjid != null">
+        ORDERS_SJID = #{ordersSjid,jdbcType=VARCHAR},
+      </if>
+      <if test="ordersName != null">
+        ORDERS_NAME = #{ordersName,jdbcType=VARCHAR},
+      </if>
+      <if test="ordersMoney != null">
+        ORDERS_MONEY = #{ordersMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="ordersTime != null">
+        ORDERS_TIME = #{ordersTime,jdbcType=DATE},
+      </if>
+    </set>
+    where ORDERS_ID = #{ordersId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qphone.pojo.Orders">
+    update ORDERS
+    set ORDERS_SJID = #{ordersSjid,jdbcType=VARCHAR},
+      ORDERS_NAME = #{ordersName,jdbcType=VARCHAR},
+      ORDERS_MONEY = #{ordersMoney,jdbcType=DECIMAL},
+      ORDERS_TIME = #{ordersTime,jdbcType=DATE}
+    where ORDERS_ID = #{ordersId,jdbcType=DECIMAL}
+  </update>
+</mapper>

@@ -3,13 +3,18 @@
 <mapper namespace="com.qphone.dao.HousePhotoMapper">
   <resultMap id="BaseResultMap" type="com.qphone.pojo.HousePhoto">
     <id column="HOUSE_PHOTO_ID" jdbcType="DECIMAL" property="housePhotoId" />
+    <result column="HUOSE_INFOR_ID" jdbcType="DECIMAL" property="huoseInforId" />
     <result column="HOUSE_PHOTO_P1" jdbcType="VARCHAR" property="housePhotoP1" />
     <result column="HOUSE_PHOTO_P2" jdbcType="VARCHAR" property="housePhotoP2" />
     <result column="HOUSE_PHOTO_P3" jdbcType="VARCHAR" property="housePhotoP3" />
     <result column="HOUSE_PHOTO_P4" jdbcType="VARCHAR" property="housePhotoP4" />
+    <result column="HOUSE_PHOTO_P5" jdbcType="VARCHAR" property="housePhotoP5" />
+    <result column="HOUSE_PHOTO_P6" jdbcType="VARCHAR" property="housePhotoP6" />
+    <result column="HOUSE_PHOTO_P7" jdbcType="VARCHAR" property="housePhotoP7" />
   </resultMap>
   <sql id="Base_Column_List">
-    HOUSE_PHOTO_ID, HOUSE_PHOTO_P1, HOUSE_PHOTO_P2, HOUSE_PHOTO_P3, HOUSE_PHOTO_P4
+    HOUSE_PHOTO_ID, HUOSE_INFOR_ID, HOUSE_PHOTO_P1, HOUSE_PHOTO_P2, HOUSE_PHOTO_P3, HOUSE_PHOTO_P4, 
+    HOUSE_PHOTO_P5, HOUSE_PHOTO_P6, HOUSE_PHOTO_P7
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
     select 
@@ -22,16 +27,23 @@
     where HOUSE_PHOTO_ID = #{housePhotoId,jdbcType=DECIMAL}
   </delete>
   <insert id="insert" parameterType="com.qphone.pojo.HousePhoto">
-    insert into HOUSE_PHOTO (HOUSE_PHOTO_ID, HOUSE_PHOTO_P1, HOUSE_PHOTO_P2, 
-      HOUSE_PHOTO_P3, HOUSE_PHOTO_P4)
-    values (#{housePhotoId,jdbcType=DECIMAL}, #{housePhotoP1,jdbcType=VARCHAR}, #{housePhotoP2,jdbcType=VARCHAR}, 
-      #{housePhotoP3,jdbcType=VARCHAR}, #{housePhotoP4,jdbcType=VARCHAR})
+    insert into HOUSE_PHOTO (HOUSE_PHOTO_ID, HUOSE_INFOR_ID, HOUSE_PHOTO_P1, 
+      HOUSE_PHOTO_P2, HOUSE_PHOTO_P3, HOUSE_PHOTO_P4, 
+      HOUSE_PHOTO_P5, HOUSE_PHOTO_P6, HOUSE_PHOTO_P7
+      )
+    values (#{housePhotoId,jdbcType=DECIMAL}, #{huoseInforId,jdbcType=DECIMAL}, #{housePhotoP1,jdbcType=VARCHAR}, 
+      #{housePhotoP2,jdbcType=VARCHAR}, #{housePhotoP3,jdbcType=VARCHAR}, #{housePhotoP4,jdbcType=VARCHAR}, 
+      #{housePhotoP5,jdbcType=VARCHAR}, #{housePhotoP6,jdbcType=VARCHAR}, #{housePhotoP7,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.qphone.pojo.HousePhoto">
     insert into HOUSE_PHOTO
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="housePhotoId != null">
         HOUSE_PHOTO_ID,
+      </if>
+      <if test="huoseInforId != null">
+        HUOSE_INFOR_ID,
       </if>
       <if test="housePhotoP1 != null">
         HOUSE_PHOTO_P1,
@@ -45,10 +57,22 @@
       <if test="housePhotoP4 != null">
         HOUSE_PHOTO_P4,
       </if>
+      <if test="housePhotoP5 != null">
+        HOUSE_PHOTO_P5,
+      </if>
+      <if test="housePhotoP6 != null">
+        HOUSE_PHOTO_P6,
+      </if>
+      <if test="housePhotoP7 != null">
+        HOUSE_PHOTO_P7,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="housePhotoId != null">
         #{housePhotoId,jdbcType=DECIMAL},
+      </if>
+      <if test="huoseInforId != null">
+        #{huoseInforId,jdbcType=DECIMAL},
       </if>
       <if test="housePhotoP1 != null">
         #{housePhotoP1,jdbcType=VARCHAR},
@@ -62,11 +86,23 @@
       <if test="housePhotoP4 != null">
         #{housePhotoP4,jdbcType=VARCHAR},
       </if>
+      <if test="housePhotoP5 != null">
+        #{housePhotoP5,jdbcType=VARCHAR},
+      </if>
+      <if test="housePhotoP6 != null">
+        #{housePhotoP6,jdbcType=VARCHAR},
+      </if>
+      <if test="housePhotoP7 != null">
+        #{housePhotoP7,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.qphone.pojo.HousePhoto">
     update HOUSE_PHOTO
     <set>
+      <if test="huoseInforId != null">
+        HUOSE_INFOR_ID = #{huoseInforId,jdbcType=DECIMAL},
+      </if>
       <if test="housePhotoP1 != null">
         HOUSE_PHOTO_P1 = #{housePhotoP1,jdbcType=VARCHAR},
       </if>
@@ -79,15 +115,28 @@
       <if test="housePhotoP4 != null">
         HOUSE_PHOTO_P4 = #{housePhotoP4,jdbcType=VARCHAR},
       </if>
+      <if test="housePhotoP5 != null">
+        HOUSE_PHOTO_P5 = #{housePhotoP5,jdbcType=VARCHAR},
+      </if>
+      <if test="housePhotoP6 != null">
+        HOUSE_PHOTO_P6 = #{housePhotoP6,jdbcType=VARCHAR},
+      </if>
+      <if test="housePhotoP7 != null">
+        HOUSE_PHOTO_P7 = #{housePhotoP7,jdbcType=VARCHAR},
+      </if>
     </set>
     where HOUSE_PHOTO_ID = #{housePhotoId,jdbcType=DECIMAL}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.qphone.pojo.HousePhoto">
     update HOUSE_PHOTO
-    set HOUSE_PHOTO_P1 = #{housePhotoP1,jdbcType=VARCHAR},
+    set HUOSE_INFOR_ID = #{huoseInforId,jdbcType=DECIMAL},
+      HOUSE_PHOTO_P1 = #{housePhotoP1,jdbcType=VARCHAR},
       HOUSE_PHOTO_P2 = #{housePhotoP2,jdbcType=VARCHAR},
       HOUSE_PHOTO_P3 = #{housePhotoP3,jdbcType=VARCHAR},
-      HOUSE_PHOTO_P4 = #{housePhotoP4,jdbcType=VARCHAR}
+      HOUSE_PHOTO_P4 = #{housePhotoP4,jdbcType=VARCHAR},
+      HOUSE_PHOTO_P5 = #{housePhotoP5,jdbcType=VARCHAR},
+      HOUSE_PHOTO_P6 = #{housePhotoP6,jdbcType=VARCHAR},
+      HOUSE_PHOTO_P7 = #{housePhotoP7,jdbcType=VARCHAR}
     where HOUSE_PHOTO_ID = #{housePhotoId,jdbcType=DECIMAL}
   </update>
 </mapper>

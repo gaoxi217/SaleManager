@@ -1,7 +1,5 @@
 package com.qphone.vo;
 
-import com.qphone.pojo.HouseInfor;
-
 import java.util.List;
 
 /**

@@ -1,13 +1,11 @@
 package com.qphone.pojo;
 
 import java.math.BigDecimal;
-/**
- * Created by 高玺 on 2019/7/1.
- */
+
 public class HouseInforLinkman {
     private BigDecimal huoseInforId;
 
-    private BigDecimal houseLinkmanId;
+    private BigDecimal userId;
 
     public BigDecimal getHuoseInforId() {
         return huoseInforId;
@@ -17,11 +15,11 @@ public class HouseInforLinkman {
         this.huoseInforId = huoseInforId;
     }
 
-    public BigDecimal getHouseLinkmanId() {
-        return houseLinkmanId;
+    public BigDecimal getUserId() {
+        return userId;
     }
 
-    public void setHouseLinkmanId(BigDecimal houseLinkmanId) {
-        this.houseLinkmanId = houseLinkmanId;
+    public void setUserId(BigDecimal userId) {
+        this.userId = userId;
     }
 }

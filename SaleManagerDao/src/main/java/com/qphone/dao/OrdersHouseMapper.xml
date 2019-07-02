@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qphone.dao.OrdersHouseMapper">
+  <resultMap id="BaseResultMap" type="com.qphone.pojo.OrdersHouse">
+    <result column="ORDERS_ID" jdbcType="DECIMAL" property="ordersId" />
+    <result column="HUOSE_INFOR_ID" jdbcType="DECIMAL" property="huoseInforId" />
+  </resultMap>
+  <insert id="insert" parameterType="com.qphone.pojo.OrdersHouse">
+    insert into ORDERS_HOUSE (ORDERS_ID, HUOSE_INFOR_ID)
+    values (#{ordersId,jdbcType=DECIMAL}, #{huoseInforId,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qphone.pojo.OrdersHouse">
+    insert into ORDERS_HOUSE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ordersId != null">
+        ORDERS_ID,
+      </if>
+      <if test="huoseInforId != null">
+        HUOSE_INFOR_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ordersId != null">
+        #{ordersId,jdbcType=DECIMAL},
+      </if>
+      <if test="huoseInforId != null">
+        #{huoseInforId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+</mapper>

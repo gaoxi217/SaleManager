@@ -2,10 +2,18 @@ package com.qphone.pojo;
 
 import java.math.BigDecimal;
 
-public class HouseInforCatalog {
+public class OrdersHouse {
+    private BigDecimal ordersId;
+
     private BigDecimal huoseInforId;
 
-    private BigDecimal houseCatalogId;
+    public BigDecimal getOrdersId() {
+        return ordersId;
+    }
+
+    public void setOrdersId(BigDecimal ordersId) {
+        this.ordersId = ordersId;
+    }
 
     public BigDecimal getHuoseInforId() {
         return huoseInforId;
@@ -13,13 +21,5 @@ public class HouseInforCatalog {
 
     public void setHuoseInforId(BigDecimal huoseInforId) {
         this.huoseInforId = huoseInforId;
-    }
-
-    public BigDecimal getHouseCatalogId() {
-        return houseCatalogId;
-    }
-
-    public void setHouseCatalogId(BigDecimal houseCatalogId) {
-        this.houseCatalogId = houseCatalogId;
     }
 }

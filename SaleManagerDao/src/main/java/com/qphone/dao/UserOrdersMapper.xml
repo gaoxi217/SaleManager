@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qphone.dao.UserOrdersMapper">
+  <resultMap id="BaseResultMap" type="com.qphone.pojo.UserOrders">
+    <result column="USER_ID" jdbcType="DECIMAL" property="userId" />
+    <result column="ORDERS_ID" jdbcType="DECIMAL" property="ordersId" />
+  </resultMap>
+  <insert id="insert" parameterType="com.qphone.pojo.UserOrders">
+    insert into USER_ORDERS (USER_ID, ORDERS_ID)
+    values (#{userId,jdbcType=DECIMAL}, #{ordersId,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qphone.pojo.UserOrders">
+    insert into USER_ORDERS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="ordersId != null">
+        ORDERS_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=DECIMAL},
+      </if>
+      <if test="ordersId != null">
+        #{ordersId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+</mapper>
