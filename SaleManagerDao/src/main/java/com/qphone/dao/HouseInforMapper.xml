@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qphone.dao.HouseInforMapper">
+  <resultMap id="BaseResultMap" type="com.qphone.pojo.HouseInfor">
+    <id column="HUOSE_INFOR_ID" jdbcType="DECIMAL" property="huoseInforId" />
+    <result column="HUOSE_INFOR_SJID" jdbcType="VARCHAR" property="huoseInforSjid" />
+    <result column="HUOSE_INFOR_ADDR" jdbcType="VARCHAR" property="huoseInforAddr" />
+    <result column="HUOSE_INFOR_STOREY" jdbcType="DECIMAL" property="huoseInforStorey" />
+    <result column="HUOSE_INFOR_CONFIG" jdbcType="VARCHAR" property="huoseInforConfig" />
+    <result column="HUOSE_INFOR_AREA" jdbcType="DECIMAL" property="huoseInforArea" />
+    <result column="HUOSE_INFOR_DESCRIBE" jdbcType="VARCHAR" property="huoseInforDescribe" />
+    <result column="HOUSE_INFOR_PAYTYPE" jdbcType="CHAR" property="houseInforPaytype" />
+    <result column="HOUSE_INFOR_DECORATION" jdbcType="CHAR" property="houseInforDecoration" />
+    <result column="HOUSE_INFOR_MONEY" jdbcType="CHAR" property="houseInforMoney" />
+    <result column="HOUSE_INFOR_LEVEL" jdbcType="DECIMAL" property="houseInforLevel" />
+    <result column="HOUSE_INFOR_STATUS" jdbcType="VARCHAR" property="houseInforStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    HUOSE_INFOR_ID, HUOSE_INFOR_SJID, HUOSE_INFOR_ADDR, HUOSE_INFOR_STOREY, HUOSE_INFOR_CONFIG,
+    HUOSE_INFOR_AREA, HUOSE_INFOR_DESCRIBE, HOUSE_INFOR_PAYTYPE, HOUSE_INFOR_DECORATION,
+    HOUSE_INFOR_MONEY, HOUSE_INFOR_LEVEL, HOUSE_INFOR_STATUS
+  </sql>
+
+  <!--=================================================-->
+  <!--查询所有-->
+  <select id="getAllHouse" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from HOUSE_INFOR
+
+  </select>
+
+
+
+  <!--  ========================================================== -->
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from HOUSE_INFOR
+    where HUOSE_INFOR_ID = #{huoseInforId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from HOUSE_INFOR
+    where HUOSE_INFOR_ID = #{huoseInforId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.qphone.pojo.HouseInfor">
+    insert into HOUSE_INFOR (HUOSE_INFOR_ID, HUOSE_INFOR_SJID, HUOSE_INFOR_ADDR,
+    HUOSE_INFOR_STOREY, HUOSE_INFOR_CONFIG, HUOSE_INFOR_AREA,
+    HUOSE_INFOR_DESCRIBE, HOUSE_INFOR_PAYTYPE, HOUSE_INFOR_DECORATION,
+    HOUSE_INFOR_MONEY, HOUSE_INFOR_LEVEL, HOUSE_INFOR_STATUS
+    )
+    values (#{huoseInforId,jdbcType=DECIMAL}, #{huoseInforSjid,jdbcType=VARCHAR}, #{huoseInforAddr,jdbcType=VARCHAR},
+    #{huoseInforStorey,jdbcType=DECIMAL}, #{huoseInforConfig,jdbcType=VARCHAR}, #{huoseInforArea,jdbcType=DECIMAL},
+    #{huoseInforDescribe,jdbcType=VARCHAR}, #{houseInforPaytype,jdbcType=CHAR}, #{houseInforDecoration,jdbcType=CHAR},
+    #{houseInforMoney,jdbcType=CHAR}, #{houseInforLevel,jdbcType=DECIMAL}, #{houseInforStatus,jdbcType=VARCHAR}
+    )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qphone.pojo.HouseInfor">
+    insert into HOUSE_INFOR
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="huoseInforId != null">
+        HUOSE_INFOR_ID,
+      </if>
+      <if test="huoseInforSjid != null">
+        HUOSE_INFOR_SJID,
+      </if>
+      <if test="huoseInforAddr != null">
+        HUOSE_INFOR_ADDR,
+      </if>
+      <if test="huoseInforStorey != null">
+        HUOSE_INFOR_STOREY,
+      </if>
+      <if test="huoseInforConfig != null">
+        HUOSE_INFOR_CONFIG,
+      </if>
+      <if test="huoseInforArea != null">
+        HUOSE_INFOR_AREA,
+      </if>
+      <if test="huoseInforDescribe != null">
+        HUOSE_INFOR_DESCRIBE,
+      </if>
+      <if test="houseInforPaytype != null">
+        HOUSE_INFOR_PAYTYPE,
+      </if>
+      <if test="houseInforDecoration != null">
+        HOUSE_INFOR_DECORATION,
+      </if>
+      <if test="houseInforMoney != null">
+        HOUSE_INFOR_MONEY,
+      </if>
+      <if test="houseInforLevel != null">
+        HOUSE_INFOR_LEVEL,
+      </if>
+      <if test="houseInforStatus != null">
+        HOUSE_INFOR_STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="huoseInforId != null">
+        #{huoseInforId,jdbcType=DECIMAL},
+      </if>
+      <if test="huoseInforSjid != null">
+        #{huoseInforSjid,jdbcType=VARCHAR},
+      </if>
+      <if test="huoseInforAddr != null">
+        #{huoseInforAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="huoseInforStorey != null">
+        #{huoseInforStorey,jdbcType=DECIMAL},
+      </if>
+      <if test="huoseInforConfig != null">
+        #{huoseInforConfig,jdbcType=VARCHAR},
+      </if>
+      <if test="huoseInforArea != null">
+        #{huoseInforArea,jdbcType=DECIMAL},
+      </if>
+      <if test="huoseInforDescribe != null">
+        #{huoseInforDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="houseInforPaytype != null">
+        #{houseInforPaytype,jdbcType=CHAR},
+      </if>
+      <if test="houseInforDecoration != null">
+        #{houseInforDecoration,jdbcType=CHAR},
+      </if>
+      <if test="houseInforMoney != null">
+        #{houseInforMoney,jdbcType=CHAR},
+      </if>
+      <if test="houseInforLevel != null">
+        #{houseInforLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="houseInforStatus != null">
+        #{houseInforStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qphone.pojo.HouseInfor">
+    update HOUSE_INFOR
+    <set>
+      <if test="huoseInforSjid != null">
+        HUOSE_INFOR_SJID = #{huoseInforSjid,jdbcType=VARCHAR},
+      </if>
+      <if test="huoseInforAddr != null">
+        HUOSE_INFOR_ADDR = #{huoseInforAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="huoseInforStorey != null">
+        HUOSE_INFOR_STOREY = #{huoseInforStorey,jdbcType=DECIMAL},
+      </if>
+      <if test="huoseInforConfig != null">
+        HUOSE_INFOR_CONFIG = #{huoseInforConfig,jdbcType=VARCHAR},
+      </if>
+      <if test="huoseInforArea != null">
+        HUOSE_INFOR_AREA = #{huoseInforArea,jdbcType=DECIMAL},
+      </if>
+      <if test="huoseInforDescribe != null">
+        HUOSE_INFOR_DESCRIBE = #{huoseInforDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="houseInforPaytype != null">
+        HOUSE_INFOR_PAYTYPE = #{houseInforPaytype,jdbcType=CHAR},
+      </if>
+      <if test="houseInforDecoration != null">
+        HOUSE_INFOR_DECORATION = #{houseInforDecoration,jdbcType=CHAR},
+      </if>
+      <if test="houseInforMoney != null">
+        HOUSE_INFOR_MONEY = #{houseInforMoney,jdbcType=CHAR},
+      </if>
+      <if test="houseInforLevel != null">
+        HOUSE_INFOR_LEVEL = #{houseInforLevel,jdbcType=DECIMAL},
+      </if>
+      <if test="houseInforStatus != null">
+        HOUSE_INFOR_STATUS = #{houseInforStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where HUOSE_INFOR_ID = #{huoseInforId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qphone.pojo.HouseInfor">
+    update HOUSE_INFOR
+    set HUOSE_INFOR_SJID = #{huoseInforSjid,jdbcType=VARCHAR},
+      HUOSE_INFOR_ADDR = #{huoseInforAddr,jdbcType=VARCHAR},
+      HUOSE_INFOR_STOREY = #{huoseInforStorey,jdbcType=DECIMAL},
+      HUOSE_INFOR_CONFIG = #{huoseInforConfig,jdbcType=VARCHAR},
+      HUOSE_INFOR_AREA = #{huoseInforArea,jdbcType=DECIMAL},
+      HUOSE_INFOR_DESCRIBE = #{huoseInforDescribe,jdbcType=VARCHAR},
+      HOUSE_INFOR_PAYTYPE = #{houseInforPaytype,jdbcType=CHAR},
+      HOUSE_INFOR_DECORATION = #{houseInforDecoration,jdbcType=CHAR},
+      HOUSE_INFOR_MONEY = #{houseInforMoney,jdbcType=CHAR},
+      HOUSE_INFOR_LEVEL = #{houseInforLevel,jdbcType=DECIMAL},
+      HOUSE_INFOR_STATUS = #{houseInforStatus,jdbcType=VARCHAR}
+    where HUOSE_INFOR_ID = #{huoseInforId,jdbcType=DECIMAL}
+  </update>
+</mapper>

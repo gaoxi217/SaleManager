@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qphone.dao.HouseInforLinkmanMapper">
+  <resultMap id="BaseResultMap" type="com.qphone.pojo.HouseInforLinkman">
+    <result column="HUOSE_INFOR_ID" jdbcType="DECIMAL" property="huoseInforId" />
+    <result column="HOUSE_LINKMAN_ID" jdbcType="DECIMAL" property="houseLinkmanId" />
+  </resultMap>
+  <insert id="insert" parameterType="com.qphone.pojo.HouseInforLinkman">
+    insert into HOUSE_INFOR_LINKMAN (HUOSE_INFOR_ID, HOUSE_LINKMAN_ID)
+    values (#{huoseInforId,jdbcType=DECIMAL}, #{houseLinkmanId,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qphone.pojo.HouseInforLinkman">
+    insert into HOUSE_INFOR_LINKMAN
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="huoseInforId != null">
+        HUOSE_INFOR_ID,
+      </if>
+      <if test="houseLinkmanId != null">
+        HOUSE_LINKMAN_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="huoseInforId != null">
+        #{huoseInforId,jdbcType=DECIMAL},
+      </if>
+      <if test="houseLinkmanId != null">
+        #{houseLinkmanId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+</mapper>

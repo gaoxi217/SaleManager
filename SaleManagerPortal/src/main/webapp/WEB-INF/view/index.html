@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Title</title>
+    <link rel="stylesheet" href="static/layui/css/layui.css" />
+</head>
+
+<frameset rows="60,*" frameborder="0" border="0" framespacing="0">
+
+    <frame src="top.html" scrolling="no" noresize="noresize"
+           marginheight="0" marginwidth="0" />
+    <frameset cols="200,*" frameborder="0" border="0" framespacing="0"
+              name="myFrame">
+        <frame src="left.html" scrolling="no" noresize="noresize"
+               marginheight="0" marginwidth="0" />
+        <frame src="right.html" scrolling="no" noresize="noresize"
+               marginheight="0" marginwidth="0" target="self" name="rightFrame"/>
+
+    </frameset>
+    <!-- <frame src="UntitledFrame-3"> -->
+</frameset>
+<noframes>
+    <body>
+    你的浏览器不支持框架显示
+    </body>
+</noframes>
+</html>
