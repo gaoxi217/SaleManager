@@ -18,6 +18,16 @@ public class SysUser {
 
     private Date userCreate;
 
+    private  String userPass;
+
+    public String getUserPass() {
+        return userPass;
+    }
+
+    public void setUserPass(String userPass) {
+        this.userPass = userPass;
+    }
+
     public BigDecimal getUserId() {
         return userId;
     }

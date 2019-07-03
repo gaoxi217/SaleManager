@@ -9,9 +9,11 @@
     <result column="USER_TEL" jdbcType="VARCHAR" property="userTel" />
     <result column="USER_ADDR" jdbcType="VARCHAR" property="userAddr" />
     <result column="USER_CREATE" jdbcType="DATE" property="userCreate" />
+    <result column="USER_PASS" jdbcType="VARCHAR" property="userPass" />
+
   </resultMap>
   <sql id="Base_Column_List">
-    USER_ID, USER_NAME, USER_SEXY, USER_REALNAME, USER_TEL, USER_ADDR, USER_CREATE
+    USER_ID, USER_NAME, USER_SEXY, USER_REALNAME, USER_TEL, USER_ADDR, USER_CREATE,USER_PASS
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
     select 
@@ -26,10 +28,10 @@
   <insert id="insert" parameterType="com.qphone.pojo.SysUser">
     insert into SYS_USER (USER_ID, USER_NAME, USER_SEXY, 
       USER_REALNAME, USER_TEL, USER_ADDR, 
-      USER_CREATE)
+      USER_CREATE,USER_PASS)
     values (#{userId,jdbcType=DECIMAL}, #{userName,jdbcType=VARCHAR}, #{userSexy,jdbcType=VARCHAR}, 
       #{userRealname,jdbcType=VARCHAR}, #{userTel,jdbcType=VARCHAR}, #{userAddr,jdbcType=VARCHAR}, 
-      #{userCreate,jdbcType=DATE})
+      #{userCreate,jdbcType=DATE},#{userPass,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.qphone.pojo.SysUser">
     insert into SYS_USER
