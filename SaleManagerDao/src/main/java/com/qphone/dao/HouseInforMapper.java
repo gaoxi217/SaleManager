@@ -2,6 +2,7 @@ package com.qphone.dao;
 
 import com.qphone.pojo.HouseInfor;
 import java.math.BigDecimal;
+import java.util.List;
 
 public interface HouseInforMapper {
     int deleteByPrimaryKey(BigDecimal huoseInforId);
@@ -15,4 +16,9 @@ public interface HouseInforMapper {
     int updateByPrimaryKeySelective(HouseInfor record);
 
     int updateByPrimaryKey(HouseInfor record);
+
+    /*
+      查询所有房源信息
+     */
+    List<HouseInfor> getAllHouse();
 }

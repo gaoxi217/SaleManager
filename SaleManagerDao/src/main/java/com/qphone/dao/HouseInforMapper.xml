@@ -21,8 +21,23 @@
     HUOSE_INFOR_AREA, HUOSE_INFOR_DESCRIBE, HOUSE_INFOR_PAYTYPE, HOUSE_INFOR_DECORATION, 
     HOUSE_INFOR_MONEY, HOUSE_INFOR_STATUS, HOUSE_INFOR_LEVEL, HOUSE_INFOR_TIME
   </sql>
+
+  <!--======================================================-->
+  <!--查询所有房源信息-->
+
+  <select id="getAllHouse" parameterMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from HOUSE_INFOR
+
+  </select>
+
+
+
+
+  <!--======================================================-->
   <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from HOUSE_INFOR
     where HUOSE_INFOR_ID = #{huoseInforId,jdbcType=DECIMAL}
