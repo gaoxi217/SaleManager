@@ -134,4 +134,23 @@ public class HouseInfor implements Serializable{
     public void setHouseInforTime(Date houseInforTime) {
         this.houseInforTime = houseInforTime;
     }
+
+    @Override
+    public String toString() {
+        return "HouseInfor{" +
+                "huoseInforId=" + huoseInforId +
+                ", huoseInforSjid='" + huoseInforSjid + '\'' +
+                ", huoseInforAddr='" + huoseInforAddr + '\'' +
+                ", huoseInforStorey=" + huoseInforStorey +
+                ", huoseInforConfig='" + huoseInforConfig + '\'' +
+                ", huoseInforArea=" + huoseInforArea +
+                ", huoseInforDescribe='" + huoseInforDescribe + '\'' +
+                ", houseInforPaytype='" + houseInforPaytype + '\'' +
+                ", houseInforDecoration='" + houseInforDecoration + '\'' +
+                ", houseInforMoney=" + houseInforMoney +
+                ", houseInforStatus='" + houseInforStatus + '\'' +
+                ", houseInforLevel=" + houseInforLevel +
+                ", houseInforTime=" + houseInforTime +
+                '}';
+    }
 }
