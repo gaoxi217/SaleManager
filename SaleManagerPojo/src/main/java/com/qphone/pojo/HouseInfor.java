@@ -1,9 +1,10 @@
 package com.qphone.pojo;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class HouseInfor {
+public class HouseInfor implements Serializable{
     private BigDecimal huoseInforId;
 
     private String huoseInforSjid;

@@ -1,10 +1,15 @@
-package com.qphone.pojo;
+package com.qphone.vo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class SysUser implements Serializable{
+/**
+ * Created by 26895 on 2019/7/3.
+ */
+public class Member implements Serializable{
+
+
     private BigDecimal userId;
 
     private String userName;
@@ -19,15 +24,10 @@ public class SysUser implements Serializable{
 
     private Date userCreate;
 
-    private  String userPass;
 
-    public String getUserPass() {
-        return userPass;
-    }
+    //角色
+    private String roleName;
 
-    public void setUserPass(String userPass) {
-        this.userPass = userPass;
-    }
 
     public BigDecimal getUserId() {
         return userId;
@@ -42,7 +42,7 @@ public class SysUser implements Serializable{
     }
 
     public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
+        this.userName = userName;
     }
 
     public String getUserSexy() {
@@ -50,7 +50,7 @@ public class SysUser implements Serializable{
     }
 
     public void setUserSexy(String userSexy) {
-        this.userSexy = userSexy == null ? null : userSexy.trim();
+        this.userSexy = userSexy;
     }
 
     public String getUserRealname() {
@@ -58,7 +58,7 @@ public class SysUser implements Serializable{
     }
 
     public void setUserRealname(String userRealname) {
-        this.userRealname = userRealname == null ? null : userRealname.trim();
+        this.userRealname = userRealname;
     }
 
     public String getUserTel() {
@@ -66,7 +66,7 @@ public class SysUser implements Serializable{
     }
 
     public void setUserTel(String userTel) {
-        this.userTel = userTel == null ? null : userTel.trim();
+        this.userTel = userTel;
     }
 
     public String getUserAddr() {
@@ -74,7 +74,7 @@ public class SysUser implements Serializable{
     }
 
     public void setUserAddr(String userAddr) {
-        this.userAddr = userAddr == null ? null : userAddr.trim();
+        this.userAddr = userAddr;
     }
 
     public Date getUserCreate() {
@@ -84,4 +84,21 @@ public class SysUser implements Serializable{
     public void setUserCreate(Date userCreate) {
         this.userCreate = userCreate;
     }
+
+
+
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+
+
+
+
+
 }

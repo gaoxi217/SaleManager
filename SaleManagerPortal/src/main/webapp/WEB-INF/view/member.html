@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>table模块快速使用</title>
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all"/>
+</head>
+<body>
+
+<table id="demo" lay-filter="test"></table>
+
+<script src="/static/layui/layui.js"></script>
+<script type="text/javascript" src="/static/js/jquery/1.9.1/jquery.js"></script>
+<script>
+    layui.use('table', function () {
+        var table = layui.table;
+
+        //第一个实例
+        table.render({
+            elem: '#demo'
+            , toolbar: 'default'
+            , height: 500
+            , url: '/Sysuser_getmember' //数据接口
+            , page: true //开启分页
+            , cols: [[ //表头
+                {type: 'checkbox', fixed: 'left'}
+                ,{field: 'userId', title: 'ID', width: 80, sort: true, fixed: 'left'}
+                , {field: 'userName', title: '用户名', width: 80}
+                , {field: 'userSexy', title: '性别', width: 80}
+                , {field: 'userRealname', title: '真实姓名', width: 100}
+                , {field: 'userTel', title: '联系电话', width: 130}
+                , {field: 'userAddr', title: '地址', width: 170}
+                , {
+                    field: 'userCreate',
+                    title: '注册时间',
+                    width: 140,
+                    sort: true,
+                    templet: '<div>{{ Format(d.userCreate,"yyyy-MM-dd")}}</div>'
+                }
+                , {field: 'roleName', title: '身份', width: 80}
+                , {fixed: 'right', width: 165, align: 'center', toolbar: '#barDemo'}
+            ]]
+        });
+
+
+
+        //监听头工具栏事件
+        table.on('toolbar(test)', function(obj){
+            var checkStatus = table.checkStatus(obj.config.id)
+                ,data = checkStatus.data; //获取选中的数据
+            switch(obj.event){
+                case 'add':
+                    layer.msg('添加');
+                    break;
+                case 'update':
+                    if(data.length === 0){
+                        layer.msg('请选择一行');
+                    } else if(data.length > 1){
+                        layer.msg('只能同时编辑一个');
+                    } else {
+                        layer.alert('编辑 [id]：'+ checkStatus.data[0].id);
+                    }
+                    break;
+                case 'delete':
+                    if(data.length === 0){
+                        layer.msg('请选择一行');
+                    } else {
+                        layer.msg('删除');
+                    }
+                    break;
+            };
+        });
+
+
+        table.on('tool(test)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+            var data = obj.data; //获得当前行数据
+            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+            var tr = obj.tr; //获得当前行 tr 的DOM对象
+
+            if (layEvent === 'detail') { //查看
+                //do somehing
+            } else if (layEvent === 'del') { //删除
+                layer.confirm('真的删除行么', function (index) {
+                    obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                    layer.close(index);
+                    //向服务端发送删除指令
+                    $.ajax({
+                        method: 'delete',
+                        url: '/Sysuser_del/'+data.userId,
+                        contentType: 'application/json',
+                        success: function (data) {
+                            if(data.success!=null) {
+                                layer.msg('删除成功啦', {icon: 1}, {time: 2000});
+                            }else {
+                                layer.msg('删除失败', {icon: 1}, {time: 2000});
+                            }
+                         },
+                        error: function (data) {
+                        layer.msg('连接网络失败，请检查网络设置或联系管理员', { icon: 2 }, { time: 2000 });
+                         }
+                });
+
+                });
+            } else if (layEvent === 'edit') { //编辑
+                //do something
+
+                //同步更新缓存对应的值
+                obj.update({
+                    username: '123'
+                    , title: 'xxx'
+                });
+            }
+        });
+
+
+    });
+
+
+    function Format(datetime, fmt) {
+        if (parseInt(datetime) == datetime) {
+            if (datetime.length == 10) {
+                datetime = parseInt(datetime) * 1000;
+            } else if (datetime.length == 13) {
+                datetime = parseInt(datetime);
+            }
+        }
+        datetime = new Date(datetime);
+        var o = {
+            "M+": datetime.getMonth() + 1,                 //月份
+            "d+": datetime.getDate(),                    //日
+            "h+": datetime.getHours(),                   //小时
+            "m+": datetime.getMinutes(),                 //分
+            "s+": datetime.getSeconds(),                 //秒
+            "q+": Math.floor((datetime.getMonth() + 3) / 3), //季度
+            "S": datetime.getMilliseconds()             //毫秒
+        };
+        if (/(y+)/.test(fmt))
+            fmt = fmt.replace(RegExp.$1, (datetime.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+            if (new RegExp("(" + k + ")").test(fmt))
+                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+    }
+    console.log(Format("1507353913000", "yyyy-M-d h:m:s.S"));
+</script>
+
+
+<script type="text/html" id="barDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="detail">查看</button>
+        <button class="layui-btn layui-btn-sm" lay-event="del">删除</button>
+        <button class="layui-btn layui-btn-sm" lay-event="edit">编辑</button>
+    </div>
+</script>
+
+
+</body>
+</html>

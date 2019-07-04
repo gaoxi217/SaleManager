@@ -2,12 +2,13 @@ package com.qphone.vo;
 
 import com.qphone.pojo.HouseInfor;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by 高玺 on 2019/7/1.
  */
-public class House {
+public class House implements Serializable{
 
     private List<HouseInfor> data;
     private  int code;

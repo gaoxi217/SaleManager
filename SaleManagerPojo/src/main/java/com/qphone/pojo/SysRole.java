@@ -1,8 +1,9 @@
 package com.qphone.pojo;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class SysRole {
+public class SysRole implements Serializable{
     private BigDecimal roleId;
 
     private String roleName;

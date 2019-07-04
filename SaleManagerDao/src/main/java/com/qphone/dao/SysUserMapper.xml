@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qphone.dao.SysUserMapper">
-  <resultMap id="BaseResultMap" type="com.qphone.pojo.SysUser">
-    <id column="USER_ID" jdbcType="DECIMAL" property="userId" />
-    <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
-    <result column="USER_SEXY" jdbcType="VARCHAR" property="userSexy" />
-    <result column="USER_REALNAME" jdbcType="VARCHAR" property="userRealname" />
-    <result column="USER_TEL" jdbcType="VARCHAR" property="userTel" />
-    <result column="USER_ADDR" jdbcType="VARCHAR" property="userAddr" />
-    <result column="USER_CREATE" jdbcType="DATE" property="userCreate" />
-    <result column="USER_PASS" jdbcType="VARCHAR" property="userPass" />
+    <resultMap id="BaseResultMap" type="com.qphone.pojo.SysUser">
+        <id column="USER_ID" jdbcType="DECIMAL" property="userId"/>
+        <result column="USER_NAME" jdbcType="VARCHAR" property="userName"/>
+        <result column="USER_SEXY" jdbcType="VARCHAR" property="userSexy"/>
+        <result column="USER_REALNAME" jdbcType="VARCHAR" property="userRealname"/>
+        <result column="USER_TEL" jdbcType="VARCHAR" property="userTel"/>
+        <result column="USER_ADDR" jdbcType="VARCHAR" property="userAddr"/>
+        <result column="USER_CREATE" jdbcType="DATE" property="userCreate"/>
+        <result column="USER_PASS" jdbcType="VARCHAR" property="userPass"/>
+    </resultMap>
 
-  </resultMap>
-  <sql id="Base_Column_List">
+    <sql id="Base_Column_List">
     USER_ID, USER_NAME, USER_SEXY, USER_REALNAME, USER_TEL, USER_ADDR, USER_CREATE,USER_PASS
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from SYS_USER
-    where USER_ID = #{userId,jdbcType=DECIMAL}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from SYS_USER
+        where USER_ID = #{userId,jdbcType=DECIMAL}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
     delete from SYS_USER
     where USER_ID = #{userId,jdbcType=DECIMAL}
   </delete>
-  <insert id="insert" parameterType="com.qphone.pojo.SysUser">
+    <insert id="insert" parameterType="com.qphone.pojo.SysUser">
     insert into SYS_USER (USER_ID, USER_NAME, USER_SEXY, 
       USER_REALNAME, USER_TEL, USER_ADDR, 
       USER_CREATE,USER_PASS)
@@ -33,80 +33,87 @@
       #{userRealname,jdbcType=VARCHAR}, #{userTel,jdbcType=VARCHAR}, #{userAddr,jdbcType=VARCHAR}, 
       #{userCreate,jdbcType=DATE},#{userPass,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.qphone.pojo.SysUser">
-    insert into SYS_USER
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        USER_ID,
-      </if>
-      <if test="userName != null">
-        USER_NAME,
-      </if>
-      <if test="userSexy != null">
-        USER_SEXY,
-      </if>
-      <if test="userRealname != null">
-        USER_REALNAME,
-      </if>
-      <if test="userTel != null">
-        USER_TEL,
-      </if>
-      <if test="userAddr != null">
-        USER_ADDR,
-      </if>
-      <if test="userCreate != null">
-        USER_CREATE,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        #{userId,jdbcType=DECIMAL},
-      </if>
-      <if test="userName != null">
-        #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="userSexy != null">
-        #{userSexy,jdbcType=VARCHAR},
-      </if>
-      <if test="userRealname != null">
-        #{userRealname,jdbcType=VARCHAR},
-      </if>
-      <if test="userTel != null">
-        #{userTel,jdbcType=VARCHAR},
-      </if>
-      <if test="userAddr != null">
-        #{userAddr,jdbcType=VARCHAR},
-      </if>
-      <if test="userCreate != null">
-        #{userCreate,jdbcType=DATE},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.qphone.pojo.SysUser">
-    update SYS_USER
-    <set>
-      <if test="userName != null">
-        USER_NAME = #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="userSexy != null">
-        USER_SEXY = #{userSexy,jdbcType=VARCHAR},
-      </if>
-      <if test="userRealname != null">
-        USER_REALNAME = #{userRealname,jdbcType=VARCHAR},
-      </if>
-      <if test="userTel != null">
-        USER_TEL = #{userTel,jdbcType=VARCHAR},
-      </if>
-      <if test="userAddr != null">
-        USER_ADDR = #{userAddr,jdbcType=VARCHAR},
-      </if>
-      <if test="userCreate != null">
-        USER_CREATE = #{userCreate,jdbcType=DATE},
-      </if>
-    </set>
-    where USER_ID = #{userId,jdbcType=DECIMAL}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.qphone.pojo.SysUser">
+
+
+    <insert id="insertSelective" parameterType="com.qphone.pojo.SysUser">
+        insert into SYS_USER
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                USER_ID,
+            </if>
+            <if test="userName != null">
+                USER_NAME,
+            </if>
+            <if test="userSexy != null">
+                USER_SEXY,
+            </if>
+            <if test="userRealname != null">
+                USER_REALNAME,
+            </if>
+            <if test="userTel != null">
+                USER_TEL,
+            </if>
+            <if test="userAddr != null">
+                USER_ADDR,
+            </if>
+            <if test="userCreate != null">
+                USER_CREATE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=DECIMAL},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="userSexy != null">
+                #{userSexy,jdbcType=VARCHAR},
+            </if>
+            <if test="userRealname != null">
+                #{userRealname,jdbcType=VARCHAR},
+            </if>
+            <if test="userTel != null">
+                #{userTel,jdbcType=VARCHAR},
+            </if>
+            <if test="userAddr != null">
+                #{userAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="userCreate != null">
+                #{userCreate,jdbcType=DATE},
+            </if>
+        </trim>
+    </insert>
+
+
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.qphone.pojo.SysUser">
+        update SYS_USER
+        <set>
+            <if test="userName != null">
+                USER_NAME = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="userSexy != null">
+                USER_SEXY = #{userSexy,jdbcType=VARCHAR},
+            </if>
+            <if test="userRealname != null">
+                USER_REALNAME = #{userRealname,jdbcType=VARCHAR},
+            </if>
+            <if test="userTel != null">
+                USER_TEL = #{userTel,jdbcType=VARCHAR},
+            </if>
+            <if test="userAddr != null">
+                USER_ADDR = #{userAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="userCreate != null">
+                USER_CREATE = #{userCreate,jdbcType=DATE},
+            </if>
+        </set>
+        where USER_ID = #{userId,jdbcType=DECIMAL}
+    </update>
+
+
+    <update id="updateByPrimaryKey" parameterType="com.qphone.pojo.SysUser">
     update SYS_USER
     set USER_NAME = #{userName,jdbcType=VARCHAR},
       USER_SEXY = #{userSexy,jdbcType=VARCHAR},
@@ -116,4 +123,107 @@
       USER_CREATE = #{userCreate,jdbcType=DATE}
     where USER_ID = #{userId,jdbcType=DECIMAL}
   </update>
+
+
+
+
+
+
+
+
+    <select id="selectAll" resultType="com.qphone.vo.Member">
+      select DISTINCT
+      u.user_id userId,u.user_name userName,u.user_sexy userSexy,
+      u.user_realname userRealname,u.user_tel userTel,
+      u.user_addr userAddr,u.user_create userCreate,
+      u.user_pass userPass,r.role_name roleName
+      from
+      sys_user u,sys_role r,user_role ur
+      where
+      u.user_id=ur.user_id and r.role_id=ur.role_id and r.role_id!=1 and r.role_id!=2
+  </select>
+
+
+    <select id="selectByUser" resultType="com.qphone.vo.Member" parameterType="com.qphone.pojo.SysUser">
+      select distinct
+      u.user_id userId,u.user_name userName,u.user_sexy userSexy,
+      u.user_realname userRealname,u.user_tel userTel,
+      u.user_addr userAddr,u.user_create userCreate,
+      u.user_pass userPass,r.role_name roleName
+      from
+      sys_user u,sys_role r,user_role ur,house_infor_linkman hil
+      where
+      u.user_id=ur.user_id and r.role_id=ur.role_id and r.role_id!=1
+      and u.user_id=hil.user_id and u.user_id!=#{userId}
+      and hil.huose_infor_id in(select huose_infor_id from house_infor_linkman where user_id=#{userId})
+    </select>
+
+
+    <select id="selectRoleByUser" parameterType="com.qphone.pojo.SysUser" resultType="int">
+        select role_id from user_role where user_id=#{userId}
+    </select>
+
+
+    <select id="selectAllXiaoShou" resultType="com.qphone.vo.Member">
+        select
+        u.user_id userId,u.user_name userName,u.user_sexy userSexy,
+        u.user_realname userRealname,u.user_tel userTel,
+        u.user_addr userAddr,u.user_create userCreate,
+        u.user_pass userPass,r.role_name roleName
+        from
+        sys_user u,sys_role r,user_role ur
+        where
+        u.user_id=ur.user_id and r.role_id=ur.role_id and r.role_id!=3 and r.role_id!=4
+    </select>
+
+
+
+
+    <select id="selectCount" resultType="int" parameterType="map">
+        SELECT COUNT (DISTINCT (u.user_id))
+        <if test="userId != null">
+            from
+            sys_user u,sys_role r,user_role ur,house_infor_linkman hil
+            where
+            u.user_id=ur.user_id and r.role_id=ur.role_id and r.role_id!=1
+            and u.user_id=hil.user_id and u.user_id!=#{userId}
+            and hil.huose_infor_id in(select huose_infor_id from house_infor_linkman where user_id=#{userId})
+        </if>
+        <if test="userId == null">
+            from
+            sys_user u,sys_role r,user_role ur
+            <if test="roleId == 1">
+                where
+                u.user_id=ur.user_id and r.role_id=ur.role_id and r.role_id!=1 and r.role_id!=2
+            </if>
+            <if test="roleId == 2">
+                where
+                u.user_id=ur.user_id and r.role_id=ur.role_id and r.role_id!=3 and r.role_id!=4
+            </if>
+        </if>
+    </select>
+
+
+
+
+
+
+
+
+
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

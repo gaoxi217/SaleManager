@@ -9,6 +9,31 @@
     insert into USER_ROLE (USER_ID, ROLE_ID)
     values (#{userId,jdbcType=DECIMAL}, #{roleId,jdbcType=DECIMAL})
   </insert>
+
+
+
+
+  <delete id="delete" parameterType="java.math.BigDecimal">
+    DELETE FROM USER_ROLE WHERE user_id=#{userId}
+  </delete>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   <insert id="insertSelective" parameterType="com.qphone.pojo.UserRole">
     insert into USER_ROLE
     <trim prefix="(" suffix=")" suffixOverrides=",">

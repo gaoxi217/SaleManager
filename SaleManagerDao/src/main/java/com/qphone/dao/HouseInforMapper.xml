@@ -25,7 +25,7 @@
   <!--======================================================-->
   <!--查询所有房源信息-->
 
-  <select id="getAllHouse" parameterMap="BaseResultMap">
+  <select id="getAllHouse" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from HOUSE_INFOR

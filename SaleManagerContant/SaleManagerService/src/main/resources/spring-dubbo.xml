@@ -11,7 +11,16 @@
 
     <dubbo:protocol name="dubbo" port="20880"/>
 
-    <dubbo:registry address="zookeeper://10.12.153.40:2181"/>
+    <!--<dubbo:registry address="zookeeper://10.12.153.40:2181"/>-->
+
+    <dubbo:registry address="zookeeper://10.12.153.54:2181"/>
     
     <dubbo:service interface="com.qphone.service.IDepService" ref="deptServiceImpl"/>
+
+    <dubbo:service interface="com.qphone.service.ISysUserService" ref="sysUserServiceImpl"/>
+
+
+
+
+
 </beans>
