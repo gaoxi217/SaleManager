@@ -1,8 +1,9 @@
 package com.qphone.pojo;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class HouseCatalog {
+public class HouseCatalog implements Serializable{
     private BigDecimal houseCatalogId;
 
     private String houseCatalogName;

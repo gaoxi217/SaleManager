@@ -1,9 +1,10 @@
 package com.qphone.pojo;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Orders {
+public class Orders implements Serializable{
     private BigDecimal ordersId;
 
     private String ordersSjid;

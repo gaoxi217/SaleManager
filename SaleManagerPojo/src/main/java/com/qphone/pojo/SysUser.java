@@ -1,9 +1,10 @@
 package com.qphone.pojo;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class SysUser {
+public class SysUser implements Serializable{
     private BigDecimal userId;
 
     private String userName;

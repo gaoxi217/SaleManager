@@ -1,9 +1,10 @@
 package com.qphone.pojo;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class HouseInfor {
+public class HouseInfor implements Serializable{
     private BigDecimal huoseInforId;
 
     private String huoseInforSjid;
@@ -132,5 +133,24 @@ public class HouseInfor {
 
     public void setHouseInforTime(Date houseInforTime) {
         this.houseInforTime = houseInforTime;
+    }
+
+    @Override
+    public String toString() {
+        return "HouseInfor{" +
+                "huoseInforId=" + huoseInforId +
+                ", huoseInforSjid='" + huoseInforSjid + '\'' +
+                ", huoseInforAddr='" + huoseInforAddr + '\'' +
+                ", huoseInforStorey=" + huoseInforStorey +
+                ", huoseInforConfig='" + huoseInforConfig + '\'' +
+                ", huoseInforArea=" + huoseInforArea +
+                ", huoseInforDescribe='" + huoseInforDescribe + '\'' +
+                ", houseInforPaytype='" + houseInforPaytype + '\'' +
+                ", houseInforDecoration='" + houseInforDecoration + '\'' +
+                ", houseInforMoney=" + houseInforMoney +
+                ", houseInforStatus='" + houseInforStatus + '\'' +
+                ", houseInforLevel=" + houseInforLevel +
+                ", houseInforTime=" + houseInforTime +
+                '}';
     }
 }

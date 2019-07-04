@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
     <title>Title</title>
     <link rel="stylesheet" href="/static/layui/css/layui.css" media="all"/>
+
 </head>
 
 <body>
@@ -18,22 +19,21 @@
     <button class="layui-btn" data-type="isAll">验证是否全选</button>
 </div>
 
-<table class="layui-table" lay-data="{width: 1500, height:330, url:'/house/index', page:true, id:'idTest'}"
-       lay-filter="demo">
+<table class="layui-table" lay-data="{width: 1300, height:500, url:'/house/infor', page:true, id:'idTest'}"
+       lay-filter="demo" toolbar="default">
     <thead>
     <tr>
         <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
         <th lay-data="{field:'huoseInforId', width:80, sort: true, fixed: true}">ID</th>
         <th lay-data="{field:'huoseInforSjid', width:100}">房源编号</th>
         <th lay-data="{field:'huoseInforAddr', width:100}">房源名称</th>
-        <th lay-data="{field:'huoseInforStorey', width:100}">楼层</th>
+        <th lay-data="{field:'huoseInforStorey', width:60}">楼层</th>
         <th lay-data="{field:'huoseInforConfig', width:80}">配置</th>
         <th lay-data="{field:'huoseInforArea', width:80, sort: true}">面积</th>
         <th lay-data="{field:'houseInforDecoration', width:80}">装修</th>
         <th lay-data="{field:'huoseInforDescribe', width:100}">房源描述</th>
         <th lay-data="{field:'houseInforPaytype', width:100}">付款方式</th>
         <th lay-data="{field:'houseInforMoney', width:100}">单价</th>
-        <th lay-data="{field:'houseInforLevel', width:80 , sort: true}">等级</th>
         <th lay-data="{field:'houseInforStatus', width:80}">状态</th>
 
         <th lay-data="{field:'houseInforLevel', width:80, sort: true, fixed: 'right'}">级别</th>
@@ -43,13 +43,14 @@
 </table>
 
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="tableSelect">查看</a>
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 
 
 <script src="/static/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="/static/js/jquery/1.9.1/jquery.js" CHARSET="UTF-8"/>
 <script>
     layui.use('table', function () {
         var table = layui.table;
@@ -60,15 +61,50 @@
         //监听工具条
         table.on('tool(demo)', function (obj) {
             var data = obj.data;
-            if (obj.event === 'detail') {
+            if (obj.event === 'tableSelect') {
                 layer.msg('ID：' + data.id + ' 的查看操作');
+
             } else if (obj.event === 'del') {
-                layer.confirm('真的删除行么', function (index) {
-                    obj.del();
-                    layer.close(index);
+                alert(data);
+                layer.confirm('真的删除行么'+data.huoseInforId, function (index) {
+                    $.ajax({
+                        url:'/house/delete/'+data.huoseInforId,
+                        method:'delete',
+                        //data:{'id':data.huoseInforId},//向服务端发送删除的id
+                        success:function(suc){
+                            alert(suc);
+                            if(suc !=null){
+                                obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                                layer.close(index);
+                                console.log(index);
+                                layer.msg("删除成功",{icon:1});
+                            }
+                            else{
+                                layer.msg("删除失败",{icon:5});
+                            }
+                        }
+                    });
                 });
+
             } else if (obj.event === 'edit') {
-                layer.alert('编辑行：<br/>' + JSON.stringify(data))
+               /* console.log(data);
+                 layer.alert('编辑行：<br/>' + JSON.stringify(data))*/
+                layer.open(
+                    {
+                        type: 2,
+                        title: '编辑页面',
+                        skin: 'layui-layer-molv',
+                        shadeClose: false,
+                        shade: 0.8,
+                        area: ['880px', '550px'],
+                        content: '/house/test',//跳转的页面
+                        cancel: function (index)
+                        {
+                            $(".layui-laypage-btn").click();//这里用于关闭Open时触发回调函数  刷新父页面数据  一定要引入Jquery
+                        }
+
+                    });
+
             }
         });
 

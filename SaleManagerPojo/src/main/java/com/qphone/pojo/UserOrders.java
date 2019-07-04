@@ -1,8 +1,9 @@
 package com.qphone.pojo;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class UserOrders {
+public class UserOrders implements Serializable{
     private BigDecimal userId;
 
     private BigDecimal ordersId;
