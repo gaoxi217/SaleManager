@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>房源信息添加</title>
+    <meta name="renderer" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all"/>
+</head>
+<body>
+
+<form class="layui-form"  > <!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
+    <div class="layui-form-item">
+        <label class="layui-form-label">房源编号</label>
+        <div class="layui-input-block">
+            <input type="text" name="huoseInforId"  placeholder="请输入" autocomplete="off" class="layui-input"/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">房源随机编号</label>
+        <div class="layui-input-block">
+            <input type="text" name="huoseInforSjid"  placeholder="请输入" autocomplete="off" class="layui-input" />
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">房源名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="huoseInforAddr"  placeholder="请输入" autocomplete="off" class="layui-input"/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">房源楼层</label>
+        <div class="layui-input-block">
+            <input type="text" name="huoseInforStorey"  placeholder="请输入" autocomplete="off" class="layui-input"/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">房源配置</label>
+        <div class="layui-input-block">
+            <input type="text" name="huoseInforConfig"   placeholder="请输入" autocomplete="off" class="layui-input"/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">房源面积</label>
+        <div class="layui-input-block">
+            <input type="text" name="huoseInforArea"  placeholder="请输入" autocomplete="off" class="layui-input"/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">选择装修</label>
+        <div class="layui-input-block">
+            <select name="houseInforDecoration"  lay-filter="aihao">
+                <option value="豪装">豪装</option>
+                <option value="简装">简装</option>
+                <option value="普装">普装</option>
+                <option value="毛坯装">毛坯装</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">房源描述</label>
+        <div class="layui-input-block">
+            <textarea placeholder="请输入内容" class="layui-textarea" name="huoseInforDescribe" ></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">房源单价(元/月)</label>
+        <div class="layui-input-block">
+            <input type="text" name="houseInforMoney" placeholder="请输入" autocomplete="off" class="layui-input"/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">付款方式</label>
+        <div class="layui-input-block">
+            <select name="houseInforPaytype"   lay-filter="aihao">
+                <option value="月付">月付</option>
+                <option value="季付">季付</option>
+                <option value="半年付">半年付</option>
+                <option value="年付">年付</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">房源状态</label>
+        <div class="layui-input-block">
+            <select name="houseInforStatus"  lay-filter="aihao">
+                <option value="正在出租">正在出租</option>
+                <option value="正在签约">正在签约</option>
+                <option value="已签约">已签约</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">房源级别</label>
+        <div class="layui-input-block">
+            <select name="houseInforLevel"  lay-filter="aihao">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit="" lay-filter="go">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+    <!-- 更多表单结构排版请移步文档左侧【页面元素-表单】一项阅览 -->
+</form>
+<script src="/static/layui/layui.js"></script>
+<script type="text/javascript" src="/static/js/jquery/1.9.1/jquery.js" CHARSET="UTF-8"/>
+<script>
+    layui.use('form', function () {
+        var form = layui.form;
+        var index = parent.layer.getFrameIndex(window.name);
+        //监听提交
+        form.on('submit(go)', function (data) {
+
+            $.ajax({
+                url: "/house/insert",
+                method:"post",
+                data: JSON.stringify(data.field),
+                contentType: 'application/json',
+                success: function (data) {
+                    if (data!=null) {
+                        alert("添加成功！");
+                        parent.layer.close(index);//关闭弹出层
+                        parent.location.reload();//更新父
+                    } else {
+                        alert("添加失败！");
+                    }
+                }
+            });
+
+            return false;
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

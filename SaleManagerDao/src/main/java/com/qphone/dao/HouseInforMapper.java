@@ -4,8 +4,13 @@ import com.qphone.pojo.HouseInfor;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 public interface HouseInforMapper {
+    /*
+    根据用户登陆信息及房源状态查询
+     */
+    List<HouseInfor> selectAllHouseByUser(Map map);
 
     /*
     根据id查询一个对象

@@ -12,10 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexController {
 
     @RequestMapping("{url}")
-    public String index(@PathVariable("url") String url){
-        System.out.println(url+"url....");
+    public String index(@PathVariable("url") String url) {
+        System.out.println(url + "url....");
         return url;
     }
+
 
 
 }
