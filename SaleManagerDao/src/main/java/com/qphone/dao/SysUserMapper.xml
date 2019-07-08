@@ -10,28 +10,36 @@
         <result column="USER_ADDR" jdbcType="VARCHAR" property="userAddr"/>
         <result column="USER_CREATE" jdbcType="DATE" property="userCreate"/>
         <result column="USER_PASS" jdbcType="VARCHAR" property="userPass"/>
+        <result column="XIAOSHOU_ID" jdbcType="DECIMAL" property="xiaoshouId"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-    USER_ID, USER_NAME, USER_SEXY, USER_REALNAME, USER_TEL, USER_ADDR, USER_CREATE,USER_PASS
+    USER_ID, USER_NAME, USER_SEXY, USER_REALNAME, USER_TEL, USER_ADDR, USER_CREATE,USER_PASS,XIAOSHOU_ID
   </sql>
+
+
     <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from SYS_USER
         where USER_ID = #{userId,jdbcType=DECIMAL}
     </select>
+
+
     <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
     delete from SYS_USER
     where USER_ID = #{userId,jdbcType=DECIMAL}
   </delete>
+
+
+
     <insert id="insert" parameterType="com.qphone.pojo.SysUser">
     insert into SYS_USER (USER_ID, USER_NAME, USER_SEXY, 
       USER_REALNAME, USER_TEL, USER_ADDR, 
-      USER_CREATE,USER_PASS)
+      USER_CREATE,USER_PASS,XIAOSHOU_ID)
     values (#{userId,jdbcType=DECIMAL}, #{userName,jdbcType=VARCHAR}, #{userSexy,jdbcType=VARCHAR}, 
       #{userRealname,jdbcType=VARCHAR}, #{userTel,jdbcType=VARCHAR}, #{userAddr,jdbcType=VARCHAR}, 
-      #{userCreate,jdbcType=DATE},#{userPass,jdbcType=VARCHAR})
+      #{userCreate,jdbcType=DATE},#{userPass,jdbcType=VARCHAR},#{xiaoshouId,jdbcType=DECIMAL})
   </insert>
 
 
@@ -59,6 +67,12 @@
             <if test="userCreate != null">
                 USER_CREATE,
             </if>
+            <if test="userPass != null">
+                USER_PASS,
+            </if>
+            <if test="xiaoshouId != null">
+                XIAOSHOU_ID,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="userId != null">
@@ -81,6 +95,12 @@
             </if>
             <if test="userCreate != null">
                 #{userCreate,jdbcType=DATE},
+            </if>
+            <if test="userPass != null">
+                #{userPass,jdbcType=VARCHAR},
+            </if>
+            <if test="xiaoshouId != null">
+                #{xiaoshouId,jdbcType=DECIMAL},
             </if>
         </trim>
     </insert>
@@ -108,9 +128,17 @@
             <if test="userCreate != null">
                 USER_CREATE = #{userCreate,jdbcType=DATE},
             </if>
+            <if test="userPass != null">
+                USER_PASS = #{userPass,jdbcType=VARCHAR},
+            </if>
+            <if test="xiaoshouId != null">
+                XIAOSHOU_ID = #{xiaoshouId,jdbcType=DECIMAL},
+            </if>
         </set>
         where USER_ID = #{userId,jdbcType=DECIMAL}
     </update>
+
+
 
 
     <update id="updateByPrimaryKey" parameterType="com.qphone.pojo.SysUser">
@@ -120,7 +148,9 @@
       USER_REALNAME = #{userRealname,jdbcType=VARCHAR},
       USER_TEL = #{userTel,jdbcType=VARCHAR},
       USER_ADDR = #{userAddr,jdbcType=VARCHAR},
-      USER_CREATE = #{userCreate,jdbcType=DATE}
+      USER_CREATE = #{userCreate,jdbcType=DATE},
+      USER_PASS = #{userPass,jdbcType=VARCHAR},
+      XIAOSHOU_ID = #{xiaoshouId,jdbcType=DECIMAL}
     where USER_ID = #{userId,jdbcType=DECIMAL}
   </update>
 
@@ -131,41 +161,19 @@
 
 
 
-    <select id="selectAll" resultType="com.qphone.vo.Member">
-      select DISTINCT
-      u.user_id userId,u.user_name userName,u.user_sexy userSexy,
-      u.user_realname userRealname,u.user_tel userTel,
-      u.user_addr userAddr,u.user_create userCreate,
-      u.user_pass userPass,r.role_name roleName
-      from
-      sys_user u,sys_role r,user_role ur
-      where
-      u.user_id=ur.user_id and r.role_id=ur.role_id and r.role_id!=1 and r.role_id!=2
-  </select>
 
 
-    <select id="selectByUser" resultType="com.qphone.vo.Member" parameterType="com.qphone.pojo.SysUser">
-      select distinct
-      u.user_id userId,u.user_name userName,u.user_sexy userSexy,
-      u.user_realname userRealname,u.user_tel userTel,
-      u.user_addr userAddr,u.user_create userCreate,
-      u.user_pass userPass,r.role_name roleName
-      from
-      sys_user u,sys_role r,user_role ur,house_infor_linkman hil
-      where
-      u.user_id=ur.user_id and r.role_id=ur.role_id and r.role_id!=1
-      and u.user_id=hil.user_id and u.user_id!=#{userId}
-      and hil.huose_infor_id in(select huose_infor_id from house_infor_linkman where user_id=#{userId})
-    </select>
 
 
-    <select id="selectRoleByUser" parameterType="com.qphone.pojo.SysUser" resultType="int">
-        select role_id from user_role where user_id=#{userId}
-    </select>
 
 
-    <select id="selectAllXiaoShou" resultType="com.qphone.vo.Member">
-        select
+    <!--    以经理的身份登录，查出所有的 房东 和 租客    -->
+    <select id="selectAll" resultType="com.qphone.vo.Member"  parameterType="com.qphone.utils.Page">
+        <![CDATA[
+        SELECT * FROM
+        (
+        SELECT temp.*, ROWNUM RN
+        FROM (select
         u.user_id userId,u.user_name userName,u.user_sexy userSexy,
         u.user_realname userRealname,u.user_tel userTel,
         u.user_addr userAddr,u.user_create userCreate,
@@ -173,21 +181,126 @@
         from
         sys_user u,sys_role r,user_role ur
         where
-        u.user_id=ur.user_id and r.role_id=ur.role_id and r.role_id!=3 and r.role_id!=4
+        u.user_id=ur.user_id and r.role_id=ur.role_id and r.role_id!=1 and r.role_id!=2
+        ) temp
+        WHERE ROWNUM <= #{end}
+        )
+        WHERE RN >= #{start}
+        ]]>
+  </select>
+
+
+
+
+
+
+
+    <!--   以销售的身份登录，查出所有与此销售有关的 房东 和 租客 -->
+    <select id="selectByUser" resultType="com.qphone.vo.Member" parameterType="map">
+        <![CDATA[
+        SELECT * FROM
+        (
+        SELECT temp.*, ROWNUM RN
+        FROM (select distinct
+        u.user_id userId,u.user_name userName,u.user_sexy userSexy,
+        u.user_realname userRealname,u.user_tel userTel,
+        u.user_addr userAddr,u.user_create userCreate,
+        u.user_pass userPass,r.role_name roleName
+        from
+        sys_user u,sys_role r,user_role ur,house_infor_linkman hil
+        where
+        u.user_id=ur.user_id and r.role_id=ur.role_id and r.role_id!=1 and r.role_id!=2
+        and u.user_id=hil.user_id
+        and hil.huose_infor_id in(select huose_infor_id from house_infor_linkman where user_id=#{user.userId})
+        or (u.xiaoshou_id = #{user.userId} and r.role_id = 4)) temp
+        WHERE ROWNUM <=#{page.end}
+        )
+        WHERE RN >=#{page.start}
+        ]]>
     </select>
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--     传入一个 SysUser对象  返回 一个此用户的角色值
+               1    经理
+               2    销售
+               3    房东
+               4    租客
+       -->
+    <select id="selectRoleByUser" parameterType="com.qphone.pojo.SysUser" resultType="int">
+        select role_id from user_role where user_id=#{userId}
+    </select>
+
+
+
+
+
+
+
+    <!--    以经理的身份登录  查出所有的 经理 和 销售    -->
+    <select id="selectAllXiaoShou" resultType="com.qphone.vo.Member" parameterType="com.qphone.utils.Page">
+        <![CDATA[
+        SELECT * FROM
+        (
+        SELECT temp.*, ROWNUM RN
+        FROM (select
+        u.user_id userId,u.user_name userName,u.user_sexy userSexy,
+        u.user_realname userRealname,u.user_tel userTel,
+        u.user_addr userAddr,u.user_create userCreate,
+        u.user_pass userPass,r.role_name roleName
+        from
+        sys_user u,sys_role r,user_role ur
+        where
+        u.user_id=ur.user_id and r.role_id=ur.role_id and r.role_id!=3 and r.role_id!=4) temp
+        WHERE ROWNUM <= #{end}
+        )
+        WHERE RN >= #{start}
+        ]]>
+    </select>
+
+
+
+
+
+    <!--
+        传入一个 map 对象
+            key         value
+            userId
+            roleId
+
+            如果userId 的值不为 null
+               （ 以销售的身份登录，查出所有与此销售有关的 房东 和 租客） 的总数量
+            如果userId 的值为 null
+                如果roleId 为 1
+                    （ 以经理的身份登录，查出所有的 房东 和 租客 ） 的总数量
+                如果roleId 为 2
+                    （ 以经理的身份登录，查出所有的 经理 和 销售 ） 的总数量
+    -->
     <select id="selectCount" resultType="int" parameterType="map">
         SELECT COUNT (DISTINCT (u.user_id))
         <if test="userId != null">
             from
             sys_user u,sys_role r,user_role ur,house_infor_linkman hil
             where
-            u.user_id=ur.user_id and r.role_id=ur.role_id and r.role_id!=1
-            and u.user_id=hil.user_id and u.user_id!=#{userId}
+            u.user_id=ur.user_id and r.role_id=ur.role_id and r.role_id!=1 and r.role_id!=2
+            and u.user_id=hil.user_id
             and hil.huose_infor_id in(select huose_infor_id from house_infor_linkman where user_id=#{userId})
+            or (u.xiaoshou_id = #{userId} and r.role_id = 4)
         </if>
         <if test="userId == null">
             from

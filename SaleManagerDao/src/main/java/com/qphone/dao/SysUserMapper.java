@@ -1,6 +1,7 @@
 package com.qphone.dao;
 
 import com.qphone.pojo.SysUser;
+import com.qphone.utils.Page;
 import com.qphone.vo.Member;
 
 import java.math.BigDecimal;
@@ -11,26 +12,54 @@ public interface SysUserMapper {
 
 
     /*
-    跟据销售人员查出所有相关联的房东与租客信息
+    以销售的身份登录，查出所有与此销售有关的 房东 和 租客
      */
-    List<Member> selectByUser(SysUser user);
+    List<Member> selectByUser(Map<String,Object> map);
+
+
+
+
+
+
 
     /*
-    查出所有的房东与租客信息
+    以经理的身份登录，查出所有的 房东 和 租客
      */
-    List<Member> selectAll();
+    List<Member> selectAll(Page page);
 
     /*
-    根据用户查出其角色
+    传入一个 SysUser对象  返回 一个此用户的角色值
+               1    经理
+               2    销售
+               3    房东
+               4    租客
      */
     int selectRoleByUser(SysUser user);
 
     /*
-    查出所有销售和经理信息
+    以经理的身份登录  查出所有的 经理 和 销售
      */
-    List<Member> selectAllXiaoShou();
+    List<Member> selectAllXiaoShou(Page page);
 
 
+
+
+
+
+    /*
+    传入一个 map 对象
+            key         value
+            userId
+            roleId
+
+            如果userId 的值不为 null
+               （ 以销售的身份登录，查出所有与此销售有关的 房东 和 租客 ） 的总数量
+            如果userId 的值为 null
+                如果roleId 为 1
+                    （ 以经理的身份登录，查出所有的 房东 和 租客 ） 的总数量
+                如果roleId 为 2
+                    （ 以经理的身份登录，查出所有的 经理 和 销售 ） 的总数量
+     */
     int selectCount(Map<String,Object> map);
 
 

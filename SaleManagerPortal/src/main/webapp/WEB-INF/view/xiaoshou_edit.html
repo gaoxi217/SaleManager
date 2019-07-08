@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>table模块快速使用</title>
+    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all"/>
+</head>
+<body>
+
+
+<form class="layui-form">
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">Id</label>
+        <div class="layui-input-block">
+            <input type="text" name="userId" required="required" lay-verify="required"  readonly="readonly"
+                   autocomplete="off" class="layui-input" id="userId"/>
+        </div>
+    </div>
+
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">用户名</label>
+        <div class="layui-input-block">
+            <input type="text" name="userName" required="required" lay-verify="required" placeholder="请输入用户名"
+                   autocomplete="off" class="layui-input" id="userName"/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">真实姓名</label>
+        <div class="layui-input-inline">
+            <input type="text" name="userRealname" required="required" lay-verify="required" placeholder="请输入真实姓名"
+                   autocomplete="off" class="layui-input" id="userRealname" />
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">性别</label>
+        <div class="layui-input-block">
+            <input type="text" name="userSexy" value="男" title="男" id="usersexy"/>
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">联系电话</label>
+        <div class="layui-input-block">
+            <input type="text" name="userTel" required="required" lay-verify="required" autocomplete="off"
+                   class="layui-input" id="userTel"/>
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">地址</label>
+        <div class="layui-input-block">
+            <input type="text" name="userAddr" required="required" lay-verify="required" autocomplete="off"
+                   class="layui-input" id="userAddr"/>
+        </div>
+    </div>
+
+
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit="" lay-filter="formDemo">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+
+
+<script src="/static/layui/layui.js"></script>
+<script type="text/javascript" src="/static/js/jquery/2.1.4/jquery.js"></script>
+<script>
+
+
+
+    //Demo
+
+
+    layui.use('form', function () {
+        var form = layui.form;
+        var index = parent.layer.getFrameIndex(window.name);
+        //监听提交
+        form.on('submit(formDemo)', function (data) {
+
+            $.ajax({
+                url: "/Sysuser_update",
+                method:"put",
+                data: JSON.stringify(data.field),
+                contentType: 'application/json',
+                dataType:'json',
+                success: function (data) {
+                    if (data.success !=null ) {
+                        alert("修改成功！");
+                        parent.layer.close(index);//关闭弹出层
+                        parent.location.reload();//更新父
+                    } else {
+                        alert("修改失败！");
+                    }
+                }
+            });
+
+            return false;
+        });
+    });
+
+
+</script>
+
+
+</body>
+</html>

@@ -24,6 +24,10 @@ public class Member implements Serializable{
 
     private Date userCreate;
 
+    private  String userPass;
+
+    private  BigDecimal xiaoshouId;
+
 
     //角色
     private String roleName;
@@ -97,8 +101,20 @@ public class Member implements Serializable{
     }
 
 
+    public String getUserPass() {
+        return userPass;
+    }
+
+    public void setUserPass(String userPass) {
+        this.userPass = userPass;
+    }
 
 
+    public BigDecimal getXiaoshouId() {
+        return xiaoshouId;
+    }
 
-
+    public void setXiaoshouId(BigDecimal xiaoshouId) {
+        this.xiaoshouId = xiaoshouId;
+    }
 }

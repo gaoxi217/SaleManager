@@ -17,10 +17,6 @@ public interface UserRoleMapper {
 
 
 
-
-
-
-
     int insertSelective(UserRole record);
 
 

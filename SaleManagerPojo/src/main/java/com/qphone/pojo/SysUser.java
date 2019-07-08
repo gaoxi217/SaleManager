@@ -21,6 +21,8 @@ public class SysUser implements Serializable{
 
     private  String userPass;
 
+    private  BigDecimal xiaoshouId;
+
     public String getUserPass() {
         return userPass;
     }
@@ -83,5 +85,13 @@ public class SysUser implements Serializable{
 
     public void setUserCreate(Date userCreate) {
         this.userCreate = userCreate;
+    }
+
+    public BigDecimal getXiaoshouId() {
+        return xiaoshouId;
+    }
+
+    public void setXiaoshouId(BigDecimal xiaoshouId) {
+        this.xiaoshouId = xiaoshouId;
     }
 }

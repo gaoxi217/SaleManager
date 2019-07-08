@@ -22,18 +22,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
   <insert id="insertSelective" parameterType="com.qphone.pojo.UserRole">
     insert into USER_ROLE
     <trim prefix="(" suffix=")" suffixOverrides=",">
