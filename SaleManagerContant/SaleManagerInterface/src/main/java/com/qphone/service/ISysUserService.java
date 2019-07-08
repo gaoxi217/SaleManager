@@ -2,6 +2,7 @@ package com.qphone.service;
 
 import com.qphone.pojo.SysUser;
 import com.qphone.utils.AjaxUtil;
+import com.qphone.utils.Page;
 import com.qphone.utils.ResultUtil;
 import com.qphone.vo.Member;
 
@@ -16,11 +17,11 @@ public interface ISysUserService {
 
 
 
-    ResultUtil<Member> getMember(SysUser user);
+    ResultUtil<Member> getMember(SysUser user, Page page);
 
 
 
-    ResultUtil<Member> getXiaoShou();
+    ResultUtil<Member> getXiaoShou(Page page);
 
 
 
@@ -31,6 +32,10 @@ public interface ISysUserService {
     AjaxUtil delUser(BigDecimal userId);
 
 
+    AjaxUtil addUser(Member member);
+
+
+    AjaxUtil updateUser(Member member);
 
 
 }

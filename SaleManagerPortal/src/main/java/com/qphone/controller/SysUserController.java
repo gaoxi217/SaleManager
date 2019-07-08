@@ -3,11 +3,12 @@ package com.qphone.controller;
 import com.qphone.pojo.SysUser;
 import com.qphone.service.ISysUserService;
 import com.qphone.utils.AjaxUtil;
+import com.qphone.utils.Page;
 import com.qphone.utils.ResultUtil;
 import com.qphone.vo.Member;
-import org.apache.zookeeper.data.Id;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.math.BigDecimal;
 
@@ -23,21 +24,20 @@ public class SysUserController {
 
 
     @RequestMapping("/Sysuser_getmember")
-    public ResultUtil<Member> getMember(){
+    public ResultUtil<Member> getMember(@RequestParam int page,@RequestParam int limit){
         SysUser user = new SysUser();
-        user.setUserId(BigDecimal.valueOf(100));
-        return iSysUserService.getMember(user);
+        Page p = new Page(page,limit);
+        user.setUserId(BigDecimal.valueOf(101));
+        return iSysUserService.getMember(user,p);
     }
-
 
 
     @RequestMapping("/Sysuser_getXiaoShou")
-    public ResultUtil<Member> getXiaoShou(){
-        return iSysUserService.getXiaoShou();
+    public ResultUtil<Member> getXiaoShou(@RequestParam int page,@RequestParam int limit){
+
+        Page p = new Page(page,limit);
+        return iSysUserService.getXiaoShou(p);
     }
-
-
-
 
 
     @RequestMapping(value = "/Sysuser_del/{userId}",method = RequestMethod.DELETE)
@@ -46,6 +46,35 @@ public class SysUserController {
         return iSysUserService.delUser(userId);
 
     }
+
+
+    @RequestMapping(value = "/Sysuser_add",method = RequestMethod.POST)
+    public AjaxUtil addUser(@RequestBody Member member){
+
+
+        return iSysUserService.addUser(member);
+    }
+
+
+
+    @RequestMapping(value = "/Sysuser_update",method = RequestMethod.PUT)
+    public AjaxUtil UpdateUser(@RequestBody Member member){
+        System.out.println(member);
+        return iSysUserService.updateUser(member);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
