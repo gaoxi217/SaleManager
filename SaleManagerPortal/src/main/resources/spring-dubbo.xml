@@ -5,9 +5,9 @@
 
     <dubbo:application name="SaleManagerPortal"/>
 
-    <dubbo:registry address="zookeeper://10.12.153.40:2181"/>
-
-    <!--<dubbo:registry address="zookeeper://10.12.153.54:2181"/>-->
+   <!-- <dubbo:registry address="zookeeper://10.12.153.40:2181"/>
+-->
+    <dubbo:registry address="zookeeper://10.12.153.54:2181"/>
 
     <dubbo:reference interface="com.qphone.service.IDepService" id="iDeptService"/>
 

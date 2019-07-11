@@ -4,6 +4,20 @@ import com.qphone.pojo.Orders;
 import java.math.BigDecimal;
 
 public interface OrdersMapper {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     int deleteByPrimaryKey(BigDecimal ordersId);
 
     int insert(Orders record);

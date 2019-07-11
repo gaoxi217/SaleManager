@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+
+
+<div id="main" style="width: 600px;height:400px;"></div>
+
+
+
+
+<script src="/static/js/echars2.js"></script>
+<script type="text/javascript" src="/static/js/jquery/1.9.1/jquery.js"></script>
+<script type="text/javascript">
+
+
+
+    //调用画图方法进行画图
+    DrawEChart(echarts);
+    //创建绘制ECharts图表的方法
+
+
+
+    function DrawEChart(echarts) {
+        var myChart;
+        myChart = echarts.init(document.getElementById('main'));
+        myChart.showLoading({
+            text: "图表数据正在努力加载..."
+        });
+
+
+
+        //定义图表属性options
+        var options = {
+            title : {
+                text: '销售业绩'
+            },
+            tooltip : {
+                trigger: 'axis'
+            },
+            legend: {
+                data:['销售总额']
+            },
+
+            toolbox: {
+                show : true,
+                feature : {
+                    dataView : {show: true, readOnly: false},
+                    magicType : {show: true, type: ['line', 'bar']},
+                    restore : {show: true},
+                    saveAsImage : {show: true}
+                }
+            },
+            calculable : true,
+            dataZoom: [{
+                type: 'slider',
+                show: true,
+                xAxisIndex: [0],
+                left: '9%',
+                bottom: -5,
+                start: 10,
+                end: 90 //初始化滚动条
+            }],
+            xAxis : [
+                {
+                    type : 'category',
+                    data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value'
+                }
+            ],
+            series : [
+                {
+                    name:'销售总额',
+                    type:'bar',
+                    data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+                    markPoint : {
+                        data : [
+                            {type : 'max', name: '最大值'},
+                            {type : 'min', name: '最小值'}
+                        ]
+                    },
+                    markLine : {
+                        data : [
+                            {type : 'average', name: '平均值'}
+                        ]
+                    }
+                }
+            ]
+        };
+
+
+
+        myChart.setOption(options); //先把可选项注入myChart中
+        myChart.hideLoading();
+        //设置延迟
+        setTimeout( function getChartData() {
+            //获得图表的options对象
+            //var options = myChart.getOption();
+            //alert(options),
+            //通过Ajax获取数据
+
+            $.ajax({
+                url : "/echarts",//springmvc的controller的请求路径
+                type : "post",
+                dataType : "json", //返回数据形式为json
+                success : function(result) {
+                    if (result) {
+                        //请求成功将数据设置到相应的位置上
+                        options.legend.data = result.legend;
+                        options.xAxis[0].data = result.category;
+                        options.series[0].data = result.series[0].data;
+
+                        myChart.hideLoading();
+                        myChart.setOption(options);
+                    }
+                },
+                error : function(xmlHttpRequest,errorMsg,exceptionObject) {
+                    alert("requestError");
+                    alert('xmlHttpRequest>>>>>' + xmlHttpRequest + ' errorMsg>>>>>' + errorMsg + ' exceptionObject>>>>>' + exceptionObject);
+                    myChart.hideLoading();
+                }
+            });
+        } ,100);
+
+    };
+
+</script>
+
+
+
+</body>
+</html>
