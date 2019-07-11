@@ -23,6 +23,7 @@ public class SysUserController {
     private ISysUserService iSysUserService;
 
 
+
     @RequestMapping("/Sysuser_getmember")
     public ResultUtil<Member> getMember(@RequestParam int page,@RequestParam int limit){
         SysUser user = new SysUser();

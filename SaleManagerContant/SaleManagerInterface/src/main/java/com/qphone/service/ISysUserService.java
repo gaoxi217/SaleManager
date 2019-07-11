@@ -15,6 +15,8 @@ import java.util.Map;
  */
 public interface ISysUserService {
 
+    //根据用户名查询对象
+    SysUser selectByName(String name);
 
 
     ResultUtil<Member> getMember(SysUser user, Page page);

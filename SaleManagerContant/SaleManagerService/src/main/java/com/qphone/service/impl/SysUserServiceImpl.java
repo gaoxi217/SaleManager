@@ -33,10 +33,15 @@ public class SysUserServiceImpl implements ISysUserService {
     private UserRoleMapper userRoleMapper;
 
 
+    @Override
+    public SysUser selectByName(String name) {
+        return sysUserMapper.selectByName(name);
+    }
+
     /*
-    传入一个SysUser，如果是经理，则查出所有的房东和租客。
-    如果是销售，则查出与此销售有关的房东和租客。
-     */
+        传入一个SysUser，如果是经理，则查出所有的房东和租客。
+        如果是销售，则查出与此销售有关的房东和租客。
+         */
     @Override
     public ResultUtil<Member> getMember(SysUser user, Page page) {
 

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>crm login</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>CRM_Left</title>
+<link rel="stylesheet" href="/static/css/stylesheet.css" type="text/css" />
+<link rel="stylesheet" href="/static/css/sidebar.css" type="text/css" />
+<script type="text/javascript"
+	src="/static/js/jquery/1.9.1/jquery.js"></script>
+
+</head>
+<script type="text/javascript">
+	function login() {
+		$.ajax({
+			url : "/login/user",
+			type : "post",
+			data : $("#theform").serialize(),
+			dataType : 'json',
+			success : function(data) {
+				if (data== "登陆成功") {
+					location.href = "/test/index";
+				} else {
+					$("#errorMsg").html("登陆失败");
+				}
+			}
+		});
+	}
+	/* 刷新验证码
+	function changeCode() {
+		var getTimestamp = new Date().getTime();//毫秒值
+		$("#code").attr("src", "/crm/admin/getCode?m=" + getTimestamp);
+	}*/
+</script>
+<body>
+
+	<div align="center">
+		<form action="main" id="theform">
+			<table>
+				<tr>
+					<td>用户名：</td>
+					<td><input type="text" name="userName" /></td>
+				</tr>
+				<tr>
+					<td>密码：</td>
+					<td><input type="password" name="userPass" /></td>
+				</tr>
+				<tr>
+					<td>用户类型：</td>
+					<td><select name="level">
+							<option	>系统管理员</option>
+							<option >销售主管</option>
+							<option >客户经理</option>
+							<option >boss</option>
+					</select></td>
+				</tr>
+				<!--<tr>
+					<td colspan="2">
+						<div>
+							<input name="logincode" type="text" placeholder="验证码"
+								style="width: 150px;" /> <img id="code" src="/crm/admin/getCode" />
+							<a id="kanbuq" href="javascript:changeCode()">看不清，换一张</a>
+						</div>
+					</td>
+				</tr>-->
+				<tr>
+					<td colspan="2" align="right"><input type="button"
+						onclick="login()" value="登录" /></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center" id="errorMsg"></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>

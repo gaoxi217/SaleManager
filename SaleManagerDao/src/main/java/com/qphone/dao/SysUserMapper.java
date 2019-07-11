@@ -9,6 +9,12 @@ import java.util.List;
 import java.util.Map;
 
 public interface SysUserMapper {
+    /*
+    登陆验证 根据用户名查询用户信息
+
+     */
+    SysUser selectByName(String name);
+
 
 
     /*
