@@ -8,14 +8,17 @@ import com.qphone.vo.House;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Created by 高玺 on 2019/7/3.
@@ -148,6 +151,7 @@ public class HouseInforController {
         System.out.println("进入修改方法");
         System.out.println("房源信息"+houseInfor);
         int i = houseInforService.updateHouseById(houseInfor);
+        System.out.println("修改结果"+i);
 
         if (i==0){
             return "修改失败";
@@ -156,6 +160,42 @@ public class HouseInforController {
         }
     }
 
+    /*
+    给指定房源新增图片
+     */
+    @RequestMapping("/upload/{id}")
+    public String  potoAdd(@PathVariable(value = "id") int id,HttpServletRequest request,@RequestParam ("file")MultipartFile file){
+        //取得随机字符串
+        UUID uuid = UUID.randomUUID();
+
+
+        //获得上传文件名称,拼接随机字符串,避免文件名重复
+        String filename = uuid + file.getOriginalFilename();
+
+        //创建上传目录
+        String path = request.getRealPath("/static/img");
+
+        //创建目录文件对象
+        File file1 = new File(path);
+
+        //判断文件是否存在,不存在就创建一个文件
+        if(!file1.exists()){
+            file1.mkdirs();
+
+        }
+        File file2 = new File(file1 + "/" + filename);
+        try {
+            file2.createNewFile();//创建文件
+            file.transferTo(file2);//上传处理
+        }catch (Exception e){
+            System.out.println("创建文件异常");
+            e.printStackTrace();
+        }
+        return "上传成功";
+    }
+
 
 
 }
+
+

@@ -6,35 +6,32 @@
 </head>
 <body>
 
-
-
-<div class="layui-upload">
-    <button type="button" class="layui-btn" id="addPhoto">多图片上传</button>
-    <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
-        预览图：
-        <div class="layui-upload-list" id="demo2"></div>
-    </blockquote>
-</div>
-
+<form action="/house/upload.do" method="post" enctype="multipart/form-data">
+    <input type="file" name="file1"/>
+    <input type="file" name="file2"/>
+    <input type="file" name="file3"/>
+    <input type="submit" value="submit"/>
+</form>
 
 <script src="/static/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="/static/js/jquery/1.9.1/jquery.js" CHARSET="UTF-8"/>
 <script>
-    layui.use('upload', function() {
+    layui.use('upload', function () {
         var $ = layui.jquery
             , upload = layui.upload;
 
         //多图片上传
         upload.render({
             elem: '#addPhoto'
-            ,url: '/house/upload/'
-            ,multiple: true
-            ,before: function(obj){
+            , url: '/house/upload/'
+            , multiple: true
+            , before: function (obj) {
                 //预读本地文件示例，不支持ie8
-                obj.preview(function(index, file, result){
-                    $('#addPhoto').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">')
+                obj.preview(function (index, file, result) {
+                    $('#addPhoto').append('<img src="' + result + '" alt="' + file.name + '" class="layui-upload-img">')
                 });
             }
-            ,done: function(res){
+            , done: function (res) {
                 //上传完毕
             }
         });

@@ -16,7 +16,14 @@
     <sql id="Base_Column_List">
     USER_ID, USER_NAME, USER_SEXY, USER_REALNAME, USER_TEL, USER_ADDR, USER_CREATE,USER_PASS,XIAOSHOU_ID
   </sql>
-
+    <!--======================================================================-->
+        <select id="selectByName" parameterType="string" resultMap="BaseResultMap">
+            select
+            <include refid="Base_Column_List"/>
+            from SYS_USER
+            where USER_NAME = #{name,jdbcType=DECIMAL}
+        </select>
+    <!--======================================================================-->
 
     <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
         select

@@ -29,6 +29,8 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
+
+
     <mvc:default-servlet-handler/>
 
     <!--配置thymeleaf视图解析器-->
@@ -47,4 +49,7 @@
         <property name="templateEngine" ref="templateEngine"></property>
         <property name="characterEncoding" value="UTF-8"></property>
     </bean>
+
+
+
 </beans>

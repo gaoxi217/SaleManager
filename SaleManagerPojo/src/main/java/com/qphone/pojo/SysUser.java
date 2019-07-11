@@ -94,4 +94,19 @@ public class SysUser implements Serializable{
     public void setXiaoshouId(BigDecimal xiaoshouId) {
         this.xiaoshouId = xiaoshouId;
     }
+
+    @Override
+    public String toString() {
+        return "SysUser{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", userSexy='" + userSexy + '\'' +
+                ", userRealname='" + userRealname + '\'' +
+                ", userTel='" + userTel + '\'' +
+                ", userAddr='" + userAddr + '\'' +
+                ", userCreate=" + userCreate +
+                ", userPass='" + userPass + '\'' +
+                ", xiaoshouId=" + xiaoshouId +
+                '}';
+    }
 }
